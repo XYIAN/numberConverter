@@ -20,6 +20,7 @@
 #include <unordered_map>
 using namespace std;
 
+//*******************DECIMAL CONVERSIONS********************
 void decToBinary(int n) { 
     int binaryNum[32]; 
     int i = 0; 
@@ -63,12 +64,80 @@ void decToHexa(int n){
     for(int j=i-1; j>=0; j--)     // printing hexadecimal number array in reverse order 
         cout << hexaDeciNum[j]; 
 }//end deca to hex 
+//*******************END DECIMAL CONVERSIONS********************
 
+//*******************BINARY CONVERSIONS************************
+int binaryToDecimal(int n){
+    int num = n;
+    int dec_value = 0;
+    int base = 1;
+    int temp = num;
+    while (temp) {
+        int last_digit = temp % 10;
+        temp = temp / 10;
+        dec_value += last_digit * base;
+        base = base * 2;
+    }
+    return dec_value;
+}//end binary to decimal 
+int convertBinarytoOctal(long long binaryNumber){
+    int octalNumber = 0, decimalNumber = 0, i = 0;
+    while(binaryNumber != 0){
+        decimalNumber += (binaryNumber%10) * pow(2,i);
+        ++i;
+        binaryNumber/=10;
+    }
+    i = 1;
+    while (decimalNumber != 0)
+    {
+        octalNumber += (decimalNumber % 8) * i;
+        decimalNumber /= 8;
+        i *= 10;
+    }
+    return octalNumber;
+}//end binary to octal 
+//*******************END BINARY CONVERSIONS********************
+
+//*******************OCTAL CONVERSIONS************************
+int octalToDecimal(int octalNumber){
+    int decimalNumber = 0, i = 0, rem;
+    while (octalNumber != 0)
+    {
+        rem = octalNumber % 10;
+        octalNumber /= 10;
+        decimalNumber += rem * pow(8, i);
+        ++i;
+    }
+    return decimalNumber;
+}//end octal to decimal 
+//*******************END OCTAL CONVERSIONS********************
+
+//*******************HEX CONVERSIONS************************
+int hexadecimalToDecimal(char hexVal[]) {    
+    int len = strlen(hexVal); 
+    int base = 1; 
+    int dec_val = 0; 
+    for (int i=len-1; i>=0; i--) {    
+        if (hexVal[i]>='0' && hexVal[i]<='9') { 
+            dec_val += (hexVal[i] - 48)*base;  
+            base = base * 16; 
+        } 
+        else if (hexVal[i]>='A' && hexVal[i]<='F') { 
+            dec_val += (hexVal[i] - 55)*base; 
+            base = base*16; 
+        } 
+    } 
+    return dec_val; 
+} //end hex to decimal
+//*******************END HEX CONVERSIONS********************
 int main() {
-  int inputNum;
+  int inputNum, numType;
   int convertNum=-1;
   char looper = 'Y'; 
   while(looper == 'Y'){ 
+    cout << endl<< "What type of number would you like to convert?"
+    <<endl << "decimal(1), binary(2), octal(3) or hex(4)? ";
+    cin >> numType; 
     std::cout <<endl<< "Enter a number to convert or exit(0): ";
     cin >> inputNum;
     if(inputNum == 0){
@@ -81,19 +150,31 @@ int main() {
         cin >> convertNum ; 
         if(convertNum == 0){break;}
         if(convertNum == 1){
-            cout <<endl<< inputNum <<" to decimal ->";
-            //
+            cout <<endl<< inputNum <<" to decimal -> ";
+            if(numType == 1){
+                cout <<endl<< inputNum << " in decimal to decimal -> " << inputNum; 
+            }
+            if(numType == 2){
+                cout <<endl<< inputNum << " in binary to decimal -> " << binaryToDecimal(inputNum); 
+            }
+            if(numType == 3){
+                cout <<endl<< inputNum << " in octal to decimal -> " << octalToDecimal(inputNum);
+            }
+            if(numType == 4){
+                //must add cases or string conversion for hexa 
+                //cout <<endl<< inputNum << " in hex to decimal -> " << hexadecimalToDecimal(hexa);
+            }
         }
         if(convertNum == 2){
-            cout <<endl<< inputNum <<" to binary ->";
+            cout <<endl<< inputNum <<" to binary -> ";
             decToBinary(inputNum); 
         }
         if(convertNum == 3){
-            cout <<endl<< inputNum <<" to octal ->";
+            cout <<endl<< inputNum <<" to octal -> ";
             decToOctal(inputNum); 
         }
         if(convertNum == 4){
-            cout <<endl<< inputNum <<" to hex ->";
+            cout <<endl<< inputNum <<" to hex -> ";
             decToHexa(inputNum);
         }
         cout << endl<<"Convert " << inputNum << " again(Y/N)? ";
