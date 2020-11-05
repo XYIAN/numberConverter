@@ -1,6 +1,8 @@
 /*
-@AUTHOR:
-@
+@    TITLE:numberConverter.cpp
+@  AUTHORS:Kyle Xyian Dilbeck
+@     DATE:11/5/20
+@FUNCTIONS:This program will convert multiple input numbers to either decimal, binary, octal or hex and may to do so multiple times. 
 */
 #include <iostream> 
 #include <iomanip>
