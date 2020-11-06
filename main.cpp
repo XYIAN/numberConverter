@@ -245,7 +245,6 @@ int main() {
             if(numType == 1){
                 cout <<endl<< inputNum << " in decimal to hex -> ";
                 decToHexa(inputNum); 
-                
             }
             if(numType == 2){
                 cout <<endl<< inputNum << " in binary to hex -> " << inputNum; 
@@ -266,7 +265,7 @@ int main() {
     cout << endl <<"Convert a new numeber(Y/N)? ";
     cin >> looper; 
     if(looper == 'N'){
-        cout <<endl<<endl<< "Now exiting...goodbye!";
+        cout <<endl<<endl<< "Now exiting...goodbye!"<<endl<<endl;
     }
     
   }//program loop 
